@@ -28,7 +28,6 @@ public class StandardNeuron implements Neuron {
 
     @Override
     public double getOutputValue() {
-        //if (!isCalculateValue) { //todo
         calculateValue = process();
         isCalculateValue = true;
         //}

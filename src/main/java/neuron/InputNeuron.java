@@ -2,7 +2,7 @@ package neuron;
 
 import activation.ActivationFunction;
 import neuron.link.NeuralLink;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,7 +70,7 @@ public class InputNeuron implements Neuron {
 
     @Override
     public void addInputLink(NeuralLink neuralLink) {
-        throw new NotImplementedException();
+
     }
 
     @Override

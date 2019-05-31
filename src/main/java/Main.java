@@ -6,10 +6,10 @@ import network.MultiLayerNetwork;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        MultiLayerNetwork network = new MultiLayerNetwork(SigmoidFunction.getInstance(), 2, 3, 1);
+        MultiLayerNetwork network = new MultiLayerNetwork(SigmoidFunction.getInstance(), 5, 3, 1);
 
-        double[][] inputs = new double[][]          {{1, 1}, {0, 1}, {1, 0}, {0, 0}};
-        double[][] expectedOutputs = new double[][] {{0},    {1},    {1},    {0}}; //XOR
+        double[][] inputs = new double[][]          {{1, 0, 0, 1, 1}, {0, 1, 1, 0, 0}};
+        double[][] expectedOutputs = new double[][] {{0},    {1}};
 
         Teacher teacher = new BackpropagationTeacher();
 
@@ -25,39 +25,62 @@ public class Main {
             }
         }
 
-        double[] res = network.process(new double[]{1, 0});
-        System.out.println("1, 0");
+        double[] res = network.process(new double[]{1, 0, 0, 1, 1});
+//        System.out.println("Укрепленная обшивка - да\n" +
+//                "Большая вместимость пассажиров - нет\n" +
+//                "Большая грузоподъемность - нет\n" +
+//                "Возможность установить вооружение - да\n" +
+//                "Возможность развить сверхзвуковую скорость - да\n");
+//        Thread.sleep(1000);
+//        for(double out : res) {
+//            Thread.sleep(1000);
+//            printRes(out);
+//        }
+//        System.out.println();
+//
+//        res = network.process(new double[]{0, 1, 1, 0, 0});
+//        Thread.sleep(1000);
+//        System.out.println("Укрепленная обшивка - нет\n" +
+//                "Большая вместимость пассажиров - да\n" +
+//                "Большая грузоподъемность - да\n" +
+//                "Возможность установить вооружение - нет\n" +
+//                "Возможность развить сверхзвуковую скорость - нет\n");
+//        for(double out : res) {
+//            Thread.sleep(1000);
+//            printRes(out);
+//        }
+//        System.out.println();
+//
+//        res = network.process(new double[]{1, 1, 1, 0, 1});
+//        Thread.sleep(1000);
+//        System.out.println("Укрепленная обшивка - да\n" +
+//                "Большая вместимость пассажиров - да\n" +
+//                "Большая грузоподъемность - да\n" +
+//                "Возможность установить вооружение - нет\n" +
+//                "Возможность развить сверхзвуковую скорость - нет\n");
+//        for(double out : res) {
+//            Thread.sleep(1000);
+//            printRes(out);
+//        }
+//        System.out.println();
+
+        res = network.process(new double[]{1, 0, 1, 1, 1});
         Thread.sleep(1000);
+        System.out.println("Укрепленная обшивка - да\n" +
+                "Большая вместимость пассажиров - нет\n" +
+                "Большая грузоподъемность - да\n" +
+                "Возможность установить вооружение - да\n" +
+                "Возможность развить сверхзвуковую скорость - да\n");
         for(double out : res) {
             Thread.sleep(1000);
-            System.out.println(out);
+            printRes(out);
         }
         System.out.println();
 
-        res = network.process(new double[]{0, 1});
-        Thread.sleep(1000);
-        System.out.println("0, 1");
-        for(double out : res) {
-            Thread.sleep(1000);
-            System.out.println(out);
-        }
-        System.out.println();
+    }
 
-        res = network.process(new double[]{1, 1});
-        System.out.println("1, 1");
-        Thread.sleep(1000);
-        for(double out : res) {
-            Thread.sleep(1000);
-            System.out.println(out);
-        }
-        System.out.println();
-
-        res = network.process(new double[]{0, 0});
-        System.out.println("0, 0");
-        Thread.sleep(1000);
-        for(double out : res) {
-            Thread.sleep(1000);
-            System.out.println(out);
-        }
+    private static void printRes(double res){
+        if(Math.round(res) == 0) System.out.println("Значение = "+ res +"\nВоенный");
+        else System.out.println("Значение = "+ res +"\nГражданский");
     }
 }
